@@ -4,9 +4,8 @@ from sys import argv
 
 import pinocchio
 
-model_path = Path(
-    Path(os.environ.get("EXAMPLE_ROBOT_DATA_MODEL_DIR")) if len(argv) < 2 else argv[1]
-)
+model_path = Path("models/example-robot-data/robots")
+
 mesh_dir = model_path.parent.parent
 urdf_model_path = model_path / "ur_description/urdf/ur5_robot.urdf"
 
@@ -32,7 +31,7 @@ pinocchio.forwardKinematics(model, data, q)
 pinocchio.updateGeometryPlacements(model, data, collision_model, collision_data)
 pinocchio.updateGeometryPlacements(model, data, visual_model, visual_data)
 
-# Print out the placement of each joint of the kinematic tree
+# 每个关节原点在世界坐标系中的位置。
 print("\nJoint placements:")
 for name, oMi in zip(model.names, data.oMi):
     print("{:<24} : {: .2f} {: .2f} {: .2f}".format(name, *oMi.translation.T.flat))

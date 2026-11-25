@@ -5,7 +5,7 @@ from sys import argv
 import pinocchio
 
 # This path refers to Pinocchio source code but you can define your own directory here.
-model_dir = Path(os.environ.get("EXAMPLE_ROBOT_DATA_MODEL_DIR"))
+model_dir = Path("models/example-robot-data/robots")
 
 # You should change here to set up your own URDF file or just pass it as an argument of
 # this example.
@@ -21,6 +21,7 @@ print("model name: " + model.name)
 data = model.createData()
 
 # Sample a random configuration
+# 随机生成关节角配置
 q = pinocchio.randomConfiguration(model)
 print(f"q: {q.T}")
 
